@@ -1,0 +1,36 @@
+{
+  "name": "vue3-ts-supabase-starter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A Vue 3 + TypeScript starter template with Supabase authentication, comprehensive documentation, and best practices",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0",
+    "vue-tsc": "^2.2.0"
+  },
+  "keywords": [
+    "vue3",
+    "typescript",
+    "supabase",
+    "starter",
+    "template",
+    "authentication",
+    "vite"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

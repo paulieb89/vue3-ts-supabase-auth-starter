@@ -1,0 +1,12 @@
+/* Import CSS files in specific order */
+@import './styles/variables.css';
+@import './styles/reset.css';
+@import './styles/utilities.css';
+@import './styles/components.css';
+
+/* Any additional global styles can go here */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
