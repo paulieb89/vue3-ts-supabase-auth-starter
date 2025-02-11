@@ -30,18 +30,41 @@ const router = createRouter({
   routes
 })
 
-// Simplified navigation guard
-router.beforeEach(async (to, from, next) => {
-  console.log('Navigation to:', to.path)
-  const { data: { session } } = await supabase.auth.getSession()
-  console.log('Auth session:', session ? 'exists' : 'none')
+// Debug logging
+console.log('Router initialized with auth checking enabled')
 
-  // Only check auth for routes that require it
-  if (to.meta.requiresAuth && !session) {
-    console.log('Auth required, redirecting to login')
-    next({ name: 'Auth', query: { redirect: to.fullPath } })
-  } else {
-    console.log('Proceeding with navigation')
+// Enhanced navigation guard with error handling and debug logs
+router.beforeEach(async (to, from, next) => {
+  console.log('Navigation guard triggered for path:', to.path)
+  console.log('From path:', from.path)
+  
+  try {
+    console.log('Attempting to get auth session...')
+    const { data: { session }, error } = await supabase.auth.getSession()
+    
+    if (error) {
+      console.error('Error getting auth session:', error)
+      throw error
+    }
+    
+    console.log('Auth session result:', {
+      exists: !!session,
+      user: session?.user?.email,
+      expiresAt: session?.expires_at
+    })
+
+    // Only check auth for routes that require it
+    if (to.meta.requiresAuth && !session) {
+      console.log('Auth required but no session, redirecting to login')
+      next({ name: 'Auth', query: { redirect: to.fullPath } })
+    } else {
+      console.log('Proceeding with navigation, auth check passed')
+      next()
+    }
+  } catch (err) {
+    console.error('Navigation guard error:', err)
+    // Proceed with navigation even if auth check fails
+    console.log('Proceeding despite error')
     next()
   }
 })

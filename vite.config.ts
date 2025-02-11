@@ -18,4 +18,17 @@ export default defineConfig({
       '@layouts': path.resolve(__dirname, './src/layouts')
     }
   },
+  server: {
+    port: 4000, // Use a completely different port
+    strictPort: true,
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost',
+      port: 4000,
+      clientPort: 4000
+    }
+  },
+  // Add logging
+  logLevel: 'info',
+  clearScreen: false
 })
